@@ -1,0 +1,72 @@
+{"example":{
+  "include": "/machine/multi_encl_schema_v0.52.json",
+  "node": {
+    "type": "Node",
+    "enableNonGracefulShutdown": false,
+    "socBoard": {
+      "type": "SoCBoard",
+      "soc": {
+        "type": "SoC",
+        "enableNonGracefulShutdown": false,
+        "local_power": "$(power:on)",
+        "nextOsImage.manifest": "$(default_next_os_image_manifest)",
+        "runningOsImageManifest": "$(default_running_os_image_manifest)"
+      },
+      "nodeMhwFpga": { "type": "NodeMHWFPGA" },
+      "nodeMp": { "type": "NodeMP" },
+      "fabric": { "type": "NodeFabric" }
+    },
+    "memoryBoard": {
+      "type": "MemoryBoard",
+      "mediaControllers": { "type": "Fam" }
+    }
+  },
+  "iZoneBoard": {
+    "type": "IZoneBoard",
+    "fabric": { "type": "SwitchFabric" },
+    "switchMhwFpga": { "type": "SwitchMHWFPGA" },
+    "iZoneBoardMp": { "type": "SwitchMP" }
+  },
+  "enclosure": {
+    "type": "Enclosure",
+    "iZone1": {
+      "type": "IZone",
+      "iZoneBoard1": {
+        "fabric": { "type": "UpperSwitchFabric" },
+        "extends": "iZoneBoard"
+      },
+      "iZoneBoard2": {
+        "fabric": { "type": "LowerSwitchFabric" },
+        "extends": "iZoneBoard"
+      }
+    },
+    "node1": { "extends": "node" },
+    "node2": { "extends": "node" },
+    "node3": { "extends": "node" },
+    "node4": { "extends": "node" },
+    "node5": { "extends": "node" },
+    "node6": { "extends": "node" },
+    "node7": { "extends": "node" },
+    "node8": { "extends": "node" },
+    "node9": { "extends": "node" },
+    "node10": { "extends": "node" }
+  },
+  "rack": {
+    "type": "Rack",
+    "default_next_os_image_manifest": "v52",
+    "default_running_os_image_manifest": "v52",
+    "power": "$(power:on)",
+    "force_all_fam_fabric_soc_off": false,
+    "force_all_fabric_soc_off": false,
+    "force_all_soc_off": false,
+    "enclosure1": { "extends": "enclosure" },
+    "enclosure2": { "extends": "enclosure" },
+    "enclosure3": { "extends": "enclosure" },
+    "enclosure4": { "extends": "enclosure" }
+  },
+  "main": {
+    "enableNonGracefulShutdown": false,
+    "rack1": { "extends": "rack" }
+  }
+}
+}

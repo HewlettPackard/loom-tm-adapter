@@ -1,0 +1,87 @@
+{
+    "endTime": 1473244821622,
+    "metrics": [
+        {
+            "error": null,
+            "series": [
+                {
+                    "columns": [
+                        "time",
+                        "value"
+                    ],
+                    "name": "cpu.idle_perc",
+                    "tags": {
+                        "Datacenter": "BUK1",
+                        "EncNum": "1",
+                        "Enclosure": "U3",
+                        "MachineVersion": "1",
+                        "Node": "1",
+                        "Rack": "A1.AboveFloor",
+                        "coordinate": "/MachineVersion/1/Datacenter/BUK1/Rack/A1.AboveFloor/Enclosure/U3/EncNum/1/Node/1",
+                        "hostname": "monagent"
+                    },
+                    "values": [
+                        [
+                            1473244818000.0,
+                            0.0
+                        ]
+                    ]
+                }
+            ]
+        },
+        {
+            "error": null,
+            "series": [
+                {
+                    "columns": [
+                        "time",
+                        "value"
+                    ],
+                    "name": "net.in_bytes_sec",
+                    "tags": {
+                        "Datacenter": "BUK1",
+                        "EncNum": "1",
+                        "Enclosure": "U3",
+                        "MachineVersion": "1",
+                        "Node": "1",
+                        "Rack": "A1.AboveFloor",
+                        "coordinate": "/MachineVersion/1/Datacenter/BUK1/Rack/A1.AboveFloor/Enclosure/U3/EncNum/1/Node/1",
+                        "device": "lo",
+                        "hostname": "monagent"
+                    },
+                    "values": [
+                        [
+                            1473244818000.0,
+                            11238.0
+                        ]
+                    ]
+                },
+                {
+                    "columns": [
+                        "time",
+                        "value"
+                    ],
+                    "name": "net.in_bytes_sec",
+                    "tags": {
+                        "Datacenter": "BUK1",
+                        "EncNum": "1",
+                        "Enclosure": "U3",
+                        "MachineVersion": "1",
+                        "Node": "1",
+                        "Rack": "A1.AboveFloor",
+                        "coordinate": "/MachineVersion/1/Datacenter/BUK1/Rack/A1.AboveFloor/Enclosure/U3/EncNum/1/Node/1",
+                        "device": "eth0",
+                        "hostname": "monagent"
+                    },
+                    "values": [
+                        [
+                            1473244818000.0,
+                            7698.0
+                        ]
+                    ]
+                }
+            ]
+        }
+    ],
+    "startTime": 1473243180000
+}

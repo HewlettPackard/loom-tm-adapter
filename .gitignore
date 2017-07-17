@@ -1,0 +1,7 @@
+.idea
+tm-adapter.iml
+target
+*~
+.classpath
+.project
+.settings/

@@ -1,0 +1,1628 @@
+{"value":{
+    "BridgeFPGA": {
+        "extends": "Firmware",
+        "type": "schema"
+    },
+    "Enclosure": {
+        "always": [
+            "and",
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "Node"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.observed_power == power:off)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.observed_power",
+                            "$(power:off)"
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:off)"
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "Fabric"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.observed_power == power:off)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.observed_power",
+                            "$(power:off)"
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:off)"
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        "extends": "Power",
+        "resource_override": "$(power:on)",
+        "stop": {
+            "effect": {
+                "iZone1.iZoneBoard1.iZoneBoardMp.complex_type_set": false,
+                "iZone1.iZoneBoard1.iZoneBoardMp.coordinate_set": false,
+                "iZone1.iZoneBoard2.iZoneBoardMp.complex_type_set": false,
+                "iZone1.iZoneBoard2.iZoneBoardMp.coordinate_set": false,
+                "observed_power": "$(power:off)",
+                "power": "$(power:off)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:on)",
+                        "$(power:off)"
+                    ]
+                ],
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:on)"
+                ]
+            ],
+            "post_execution": {
+                "power": "$(power:stopping)"
+            },
+            "type": "action"
+        },
+        "type": "schema"
+    },
+    "Fabric": {
+        "extends": "Power",
+        "fpga": {
+            "type": "Firmware"
+        },
+        "type": "schema"
+    },
+    "Fam": {
+        "always": [
+            "and",
+            [
+                "=>",
+                [
+                    "==",
+                    "parent.socBoard.nodeMp.complex_type_set",
+                    true
+                ],
+                [
+                    "==",
+                    "power",
+                    "$(power:on)"
+                ]
+            ],
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "MgmtMP"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.complex_type_set == true)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.complex_type_set",
+                            true
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:on)"
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "SwitchFabric"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.observed_power == power:off)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.observed_power",
+                            "$(power:off)"
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:off)"
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "NodeFabric"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.observed_power == power:off)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.observed_power",
+                            "$(power:off)"
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:off)"
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        "extends": "Power",
+        "fpga": {
+            "type": "FamFPGA"
+        },
+        "mc1": {},
+        "mc2": {},
+        "mc3": {},
+        "mc4": {},
+        "micro": {
+            "type": "FamMicro"
+        },
+        "resource_override": "$(parent.all_node_fam_pow)",
+        "start": {
+            "effect": {
+                "fpga.observed_fwVersion": "$(x)",
+                "micro.observed_fwVersion": "$(y)",
+                "observed_power": "$(power:on)",
+                "power": "$(power:on)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:off)"
+                ],
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:off)",
+                        "$(power:on)"
+                    ]
+                ],
+                [
+                    "==",
+                    "fpga.observed_fwVersionInstalled",
+                    "$(x)"
+                ],
+                [
+                    "==",
+                    "micro.observed_fwVersionInstalled",
+                    "$(y)"
+                ]
+            ],
+            "parameters": {
+                "x": {
+                    "type": "string"
+                },
+                "y": {
+                    "type": "string"
+                }
+            },
+            "post_execution": {
+                "power": "$(power:starting)"
+            },
+            "type": "action"
+        },
+        "type": "schema"
+    },
+    "FamFPGA": {
+        "extends": "Firmware",
+        "type": "schema"
+    },
+    "FamMicro": {
+        "extends": "Reset",
+        "type": "schema"
+    },
+    "Firmware": {
+        "extends": "ResourceStatus",
+        "fwVersion": {
+            "type": "string",
+            "value": "v1"
+        },
+        "fwVersionInstalled": {
+            "type": "string",
+            "value": "v1"
+        },
+        "installFw": {
+            "effect": {
+                "observed_fwVersionInstalled": "$(x)"
+            },
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "type": "action"
+        },
+        "observed_fwVersion": {
+            "type": "string",
+            "value": "$(fwVersion)",
+            "variable": true
+        },
+        "observed_fwVersionInstalled": {
+            "type": "string",
+            "value": "$(fwVersionInstalled)",
+            "variable": true
+        },
+        "type": "schema"
+    },
+    "IZone": {
+        "type": "schema"
+    },
+    "IZoneBoard": {
+        "type": "schema"
+    },
+    "LowerSwitchFabric": {
+        "always": [
+            "for",
+            {
+                "x": {
+                    "type": "UpperSwitchFabric"
+                }
+            },
+            [
+                "when",
+                "$(x.observed_power == power:on)",
+                [
+                    "=>",
+                    [
+                        "==",
+                        "x.observed_power",
+                        "$(power:on)"
+                    ],
+                    [
+                        "==",
+                        "power",
+                        "$(power:on)"
+                    ]
+                ]
+            ]
+        ],
+        "extends": "SwitchFabric",
+        "start": {
+            "effect": {
+                "fpga.observed_fwVersion": "$(x)",
+                "observed_power": "$(power:on)",
+                "power": "$(power:on)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:off)"
+                ],
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:off)",
+                        "$(power:on)"
+                    ]
+                ],
+                [
+                    "==",
+                    "fpga.observed_fwVersionInstalled",
+                    "$(x)"
+                ]
+            ],
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "post_execution": {
+                "power": "$(power:starting)"
+            },
+            "type": "action"
+        },
+        "type": "schema"
+    },
+    "MemoryBoard": {
+        "type": "schema"
+    },
+    "MgmtMP": {
+        "complex_type_set": {
+            "type": "boolean",
+            "value": "$(parent.power == power:on)",
+            "variable": true
+        },
+        "coordinate_set": {
+            "type": "boolean",
+            "value": "$(parent.power == power:on)",
+            "variable": true
+        },
+        "extends": "MpReset",
+        "setComplexType": {
+            "effect": {
+                "complex_type_set": true
+            },
+            "local_condition": [
+                "==",
+                "coordinate_set",
+                true
+            ],
+            "type": "action"
+        },
+        "setCoordinate": {
+            "effect": {
+                "coordinate_set": true
+            },
+            "remote_condition": [
+                "==",
+                "parent.power",
+                "$(power:on)"
+            ],
+            "type": "action"
+        },
+        "type": "schema"
+    },
+    "MpReset": {
+        "driversInstalled": {
+            "type": "string",
+            "value": "v1"
+        },
+        "driversVersion": {
+            "type": "string",
+            "value": "v1"
+        },
+        "extends": "Firmware",
+        "installDrivers": {
+            "effect": {
+                "observed_driversInstalled": "$(x)"
+            },
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "type": "action"
+        },
+        "installMFw": {
+            "effect": {
+                "observed_mFwVersionInstalled": "$(x)"
+            },
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "type": "action"
+        },
+        "installOS": {
+            "effect": {
+                "observed_osImageInstalled": "$(x)"
+            },
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "type": "action"
+        },
+        "mFwVersion": {
+            "type": "string",
+            "value": "v1"
+        },
+        "mFwVersionInstalled": {
+            "type": "string",
+            "value": "v1"
+        },
+        "observed_driversInstalled": {
+            "type": "string",
+            "value": "$(driversInstalled)",
+            "variable": true
+        },
+        "observed_driversVersion": {
+            "type": "string",
+            "value": "$(driversVersion)",
+            "variable": true
+        },
+        "observed_mFwVersion": {
+            "type": "string",
+            "value": "$(mFwVersion)",
+            "variable": true
+        },
+        "observed_mFwVersionInstalled": {
+            "type": "string",
+            "value": "$(mFwVersionInstalled)",
+            "variable": true
+        },
+        "observed_osImage": {
+            "type": "string",
+            "value": "$(osImage)",
+            "variable": true
+        },
+        "observed_osImageInstalled": {
+            "type": "string",
+            "value": "$(osImageInstalled)",
+            "variable": true
+        },
+        "osImage": {
+            "type": "string",
+            "value": "v1"
+        },
+        "osImageInstalled": {
+            "type": "string",
+            "value": "v1"
+        },
+        "reboot": {
+            "effect": {
+                "observed_driversVersion": "$(y)",
+                "observed_fwVersion": "$(w)",
+                "observed_mFwVersion": "$(x)",
+                "observed_osImage": "$(z)",
+                "rebootSeqNbr": "$(++)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "==",
+                    "observed_fwVersionInstalled",
+                    "$(w)"
+                ],
+                [
+                    "==",
+                    "observed_mFwVersionInstalled",
+                    "$(x)"
+                ],
+                [
+                    "==",
+                    "observed_driversInstalled",
+                    "$(y)"
+                ],
+                [
+                    "==",
+                    "observed_osImageInstalled",
+                    "$(z)"
+                ]
+            ],
+            "parameters": {
+                "w": {
+                    "type": "string"
+                },
+                "x": {
+                    "type": "string"
+                },
+                "y": {
+                    "type": "string"
+                },
+                "z": {
+                    "type": "string"
+                }
+            },
+            "type": "action"
+        },
+        "rebootSeqNbr": {
+            "type": "integer",
+            "value": 0,
+            "variable": true
+        },
+        "type": "schema"
+    },
+    "Node": {
+        "always": [
+            "for",
+            {
+                "x": {
+                    "type": "Fam"
+                }
+            },
+            [
+                "when",
+                "$(x.power == power:off)",
+                [
+                    "=>",
+                    [
+                        "==",
+                        "x.power",
+                        "$(power:off)"
+                    ],
+                    [
+                        "==",
+                        "power",
+                        "$(power:off)"
+                    ]
+                ]
+            ]
+        ],
+        "extends": "Power",
+        "resource_override": "$(power:on)",
+        "start": {
+            "effect": {
+                "observed_power": "$(power:on)",
+                "power": "$(power:on)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:off)",
+                        "$(power:on)"
+                    ]
+                ],
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:off)"
+                ]
+            ],
+            "post_execution": {
+                "power": "$(power:starting)"
+            },
+            "remote_condition": [
+                "==",
+                "parent.power",
+                "$(power:on)"
+            ],
+            "type": "action"
+        },
+        "stop": {
+            "effect": {
+                "observed_power": "$(power:off)",
+                "power": "$(power:off)",
+                "socBoard.nodeMp.complex_type_set": false,
+                "socBoard.nodeMp.coordinate_set": false
+            },
+            "local_condition": [
+                "and",
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:on)",
+                        "$(power:off)"
+                    ]
+                ],
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:on)"
+                ]
+            ],
+            "post_execution": {
+                "power": "$(power:stopping)"
+            },
+            "type": "action"
+        },
+        "type": "schema"
+    },
+    "NodeFabric": {
+        "always": [
+            "and",
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "Fam"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.observed_power == power:on)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.observed_power",
+                            "$(power:on)"
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:on)"
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "SwitchFabric"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.link_trained_up == true)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.link_trained_up",
+                            true
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:on)"
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "SwitchFabric"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.link_trained_up == false)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.link_trained_up",
+                            false
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:off)"
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "SoC"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.observed_power == power:off)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.observed_power",
+                            "$(power:off)"
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:off)"
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        "extends": "Fabric",
+        "fpga": {
+            "type": "BridgeFPGA"
+        },
+        "resource_override": "$(parent.all_fabric_pow)",
+        "start": {
+            "effect": {
+                "fpga.observed_fwVersion": "$(x)",
+                "observed_power": "$(power:on)",
+                "power": "$(power:on)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:off)"
+                ],
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:off)",
+                        "$(power:on)"
+                    ]
+                ],
+                [
+                    "==",
+                    "fpga.observed_fwVersionInstalled",
+                    "$(x)"
+                ]
+            ],
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "post_execution": {
+                "power": "$(power:starting)"
+            },
+            "type": "action"
+        },
+        "type": "schema"
+    },
+    "NodeMHWFPGA": {
+        "extends": "Reset",
+        "type": "schema"
+    },
+    "NodeMP": {
+        "extends": "MgmtMP",
+        "type": "schema"
+    },
+    "OsImage": {
+        "manifest": {
+            "type": "string",
+            "value": "$TBD",
+            "variable": true
+        },
+        "observed_manifest": {
+            "type": "string",
+            "value": "$(manifest)",
+            "variable": true
+        },
+        "observed_message": {
+            "type": "string",
+            "value": "ok"
+        },
+        "observed_status": {
+            "type": "e_manifestStatus",
+            "value": "$(e_manifestStatus:ready)",
+            "variable": true
+        },
+        "type": "schema"
+    },
+    "Power": {
+        "enableNonGracefulShutdown": false,
+        "enablePowerOffForce": "$(this.enableNonGracefulShutdown || root.main.enableNonGracefulShutdown)",
+        "extends": "ResourceStatus",
+        "forceStop": {
+            "effect": {
+                "observed_power": "$(power:off)",
+                "power": "$(power:off)"
+            },
+            "local_condition": [
+                "or",
+                [
+                    "and",
+                    [
+                        "==",
+                        "power",
+                        "$(power:stopping)"
+                    ],
+                    [
+                        "==",
+                        "observed_power",
+                        "$(power:on)"
+                    ]
+                ],
+                [
+                    "and",
+                    [
+                        "==",
+                        "power",
+                        "$(power:starting)"
+                    ],
+                    [
+                        "==",
+                        "observed_power",
+                        "$(power:off)"
+                    ]
+                ]
+            ],
+            "post_execution": {
+                "power": "$(power:stopping)"
+            },
+            "type": "action"
+        },
+        "local_power": {
+            "type": "power",
+            "value": "$(power:on)"
+        },
+        "matchOff": {
+            "effect": {
+                "power": "$(power:off)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "==",
+                    "power",
+                    "$(power:stopping)"
+                ],
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:off)"
+                ]
+            ],
+            "type": "action"
+        },
+        "matchOn": {
+            "effect": {
+                "power": "$(power:on)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "==",
+                    "power",
+                    "$(power:starting)"
+                ],
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:on)"
+                ]
+            ],
+            "type": "action"
+        },
+        "observed_power": {
+            "type": "power",
+            "value": "$(power)",
+            "variable": true
+        },
+        "power": {
+            "type": "power",
+            "value": "$(if ((local_power == power:on) && ((parent.power == power:on) && (resource_override == power:on))) then power:on else power:off)",
+            "variable": true
+        },
+        "resource_override": {
+            "type": "power",
+            "value": "$TBD"
+        },
+        "start": {
+            "effect": {
+                "observed_power": "$(power:on)",
+                "power": "$(power:on)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:off)",
+                        "$(power:on)"
+                    ]
+                ],
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:off)"
+                ]
+            ],
+            "post_execution": {
+                "power": "$(power:starting)"
+            },
+            "type": "action"
+        },
+        "stop": {
+            "effect": {
+                "observed_power": "$(power:off)",
+                "power": "$(power:off)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:on)",
+                        "$(power:off)"
+                    ]
+                ],
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:on)"
+                ]
+            ],
+            "post_execution": {
+                "power": "$(power:stopping)"
+            },
+            "type": "action"
+        },
+        "type": "schema"
+    },
+    "Rack": {
+        "all_fabric_pow": "$(if ((force_all_fabric_soc_off == false) && (all_node_fam_pow == power:on)) then power:on else power:off)",
+        "all_node_fam_pow": "$(if ((force_all_fam_fabric_soc_off == false) && (power == power:on)) then power:on else power:off)",
+        "all_node_soc_pow": "$(if ((force_all_soc_off == false) && (all_fabric_pow == power:on)) then power:on else power:off)",
+        "default_next_os_image_manifest": {
+            "type": "string",
+            "value": "$TBD"
+        },
+        "default_running_os_image_manifest": {
+            "type": "string",
+            "value": "$TBD"
+        },
+        "enableNonGracefulShutdown": false,
+        "force_all_fabric_soc_off": {
+            "type": "boolean",
+            "value": "$TBD"
+        },
+        "force_all_fam_fabric_soc_off": {
+            "type": "boolean",
+            "value": "$TBD"
+        },
+        "force_all_soc_off": {
+            "type": "boolean",
+            "value": "$TBD"
+        },
+        "power": {
+            "type": "power",
+            "value": "$TBD"
+        },
+        "type": "schema"
+    },
+    "Reset": {
+        "extends": "Firmware",
+        "power": {
+            "type": "power",
+            "value": "$(parent.power)"
+        },
+        "reset": {
+            "effect": {
+                "observed_fwVersion": "$(x)",
+                "resetSeqNbr": "$(++)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "==",
+                    "power",
+                    "$(power:on)"
+                ],
+                [
+                    "==",
+                    "observed_fwVersionInstalled",
+                    "$(x)"
+                ]
+            ],
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "type": "action"
+        },
+        "resetSeqNbr": {
+            "type": "integer",
+            "value": 0,
+            "variable": true
+        },
+        "type": "schema"
+    },
+    "ResourceStatus": {
+        "last_action_status": {
+            "type": "Status"
+        },
+        "state_status": {
+            "type": "Status"
+        },
+        "type": "schema"
+    },
+    "SoC": {
+        "always": [
+            "for",
+            {
+                "x": {
+                    "type": "NodeFabric"
+                }
+            },
+            [
+                "when",
+                "$(x.observed_power == power:on)",
+                [
+                    "=>",
+                    [
+                        "==",
+                        "x.observed_power",
+                        "$(power:on)"
+                    ],
+                    [
+                        "==",
+                        "power",
+                        "$(power:on)"
+                    ]
+                ]
+            ]
+        ],
+        "checkOSManifestStatus": {
+            "effect": {
+                "nextOsImage.manifest": "$(x)",
+                "nextOsImage.observed_manifest": "$(x)",
+                "nextOsImage.observed_status": "$(e_manifestStatus:ready)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "==",
+                    "nextOsImage.observed_manifest",
+                    "$(x)"
+                ],
+                [
+                    "==",
+                    "nextOsImage.observed_status",
+                    "$(e_manifestStatus:building)"
+                ]
+            ],
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "type": "action"
+        },
+        "configureOS": {
+            "effect": {
+                "nextOsImage.manifest": "$(x)",
+                "nextOsImage.observed_manifest": "$(x)",
+                "nextOsImage.observed_status": "$(e_manifestStatus:ready)"
+            },
+            "local_condition": [
+                "!=",
+                "nextOsImage.observed_manifest",
+                "$(x)"
+            ],
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "type": "action"
+        },
+        "extends": "Power",
+        "forceStop": {
+            "effect": {
+                "observed_power": "$(power:off)",
+                "power": "$(power:off)"
+            },
+            "local_condition": [
+                "or",
+                [
+                    "and",
+                    [
+                        "==",
+                        "power",
+                        "$(power:stopping)"
+                    ],
+                    [
+                        "==",
+                        "observed_power",
+                        "$(power:on)"
+                    ]
+                ],
+                [
+                    "and",
+                    [
+                        "==",
+                        "power",
+                        "$(power:starting)"
+                    ],
+                    [
+                        "==",
+                        "observed_power",
+                        "$(power:off)"
+                    ]
+                ],
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:error)"
+                ]
+            ],
+            "post_execution": {
+                "power": "$(power:stopping)"
+            },
+            "type": "action"
+        },
+        "fwVersion": {
+            "type": "string",
+            "value": "v1"
+        },
+        "fwVersionInstalled": {
+            "type": "string",
+            "value": "v1"
+        },
+        "installFw": {
+            "effect": {
+                "observed_fwVersionInstalled": "$(x)"
+            },
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "type": "action"
+        },
+        "nextOsImage": {
+            "type": "OsImage"
+        },
+        "observed_fwVersion": {
+            "type": "string",
+            "value": "$(fwVersion)",
+            "variable": true
+        },
+        "observed_fwVersionInstalled": {
+            "type": "string",
+            "value": "$(fwVersionInstalled)",
+            "variable": true
+        },
+        "resource_override": "$(parent.all_node_soc_pow)",
+        "runningOsImageManifest": {
+            "type": "string",
+            "value": "$TBD",
+            "variable": true
+        },
+        "start": {
+            "effect": {
+                "observed_fwVersion": "$(x)",
+                "observed_power": "$(power:on)",
+                "power": "$(power:on)",
+                "runningOsImageManifest": "$(y)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:off)"
+                ],
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:off)",
+                        "$(power:on)"
+                    ]
+                ],
+                [
+                    "==",
+                    "observed_fwVersionInstalled",
+                    "$(x)"
+                ]
+            ],
+            "parameters": {
+                "x": {
+                    "type": "string"
+                },
+                "y": {
+                    "type": "string"
+                }
+            },
+            "post_execution": {
+                "power": "$(power:starting)"
+            },
+            "remote_condition": [
+                "and",
+                [
+                    "==",
+                    "nextOsImage.observed_manifest",
+                    "$(y)"
+                ],
+                [
+                    "==",
+                    "nextOsImage.observed_status",
+                    "$(e_manifestStatus:ready)"
+                ]
+            ],
+            "type": "action"
+        },
+        "type": "schema"
+    },
+    "SoCBoard": {
+        "type": "schema"
+    },
+    "Status": {
+        "error_code": {
+            "type": "integer",
+            "value": 0
+        },
+        "error_mgs": {
+            "type": "string",
+            "value": "none"
+        },
+        "recoverable": {
+            "type": "boolean",
+            "value": false
+        },
+        "status": {
+            "type": "status",
+            "value": "$(status:unset)"
+        },
+        "type": "schema"
+    },
+    "SwitchFPGA": {
+        "extends": "Firmware",
+        "fpga1": {},
+        "fpga2": {},
+        "type": "schema"
+    },
+    "SwitchFabric": {
+        "always": [
+            "and",
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "NodeFabric"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.observed_power == power:off)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.observed_power",
+                            "$(power:off)"
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:off)"
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "SoC"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.observed_power == power:off)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.observed_power",
+                            "$(power:off)"
+                        ],
+                        [
+                            "==",
+                            "link_trained_up",
+                            false
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "SwitchFabric"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.observed_power == power:on)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.observed_power",
+                            "$(power:on)"
+                        ],
+                        [
+                            "==",
+                            "link_trained_up",
+                            true
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "for",
+                {
+                    "x": {
+                        "type": "SwitchFabric"
+                    }
+                },
+                [
+                    "when",
+                    "$(x.link_trained_up == false)",
+                    [
+                        "=>",
+                        [
+                            "==",
+                            "x.link_trained_up",
+                            false
+                        ],
+                        [
+                            "==",
+                            "power",
+                            "$(power:off)"
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        "extends": "Fabric",
+        "fpga": {
+            "type": "SwitchFPGA"
+        },
+        "link_trained_up": {
+            "type": "boolean",
+            "value": "$(parent.all_fabric_pow == power:on)",
+            "variable": true
+        },
+        "prepareLinkDown": {
+            "effect": {
+                "link_trained_up": false
+            },
+            "local_condition": [
+                "==",
+                "link_trained_up",
+                true
+            ],
+            "type": "action"
+        },
+        "resource_override": "$(parent.all_fabric_pow)",
+        "stop": {
+            "effect": {
+                "observed_power": "$(power:off)",
+                "power": "$(power:off)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:on)",
+                        "$(power:off)"
+                    ]
+                ],
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:on)"
+                ]
+            ],
+            "post_execution": {
+                "power": "$(power:stopping)"
+            },
+            "type": "action"
+        },
+        "trainEnclosureLinks": {
+            "effect": {
+                "link_trained_up": true
+            },
+            "local_condition": [
+                "==",
+                "link_trained_up",
+                false
+            ],
+            "type": "action"
+        },
+        "type": "schema"
+    },
+    "SwitchMHWFPGA": {
+        "extends": "Reset",
+        "type": "schema"
+    },
+    "SwitchMP": {
+        "extends": "MgmtMP",
+        "type": "schema"
+    },
+    "UpperSwitchFabric": {
+        "always": [
+            "for",
+            {
+                "x": {
+                    "type": "Fam"
+                }
+            },
+            [
+                "when",
+                "$(x.observed_power == power:on)",
+                [
+                    "=>",
+                    [
+                        "==",
+                        "x.observed_power",
+                        "$(power:on)"
+                    ],
+                    [
+                        "==",
+                        "power",
+                        "$(power:on)"
+                    ]
+                ]
+            ]
+        ],
+        "extends": "SwitchFabric",
+        "start": {
+            "effect": {
+                "fpga.observed_fwVersion": "$(x)",
+                "observed_power": "$(power:on)",
+                "power": "$(power:on)"
+            },
+            "local_condition": [
+                "and",
+                [
+                    "==",
+                    "observed_power",
+                    "$(power:off)"
+                ],
+                [
+                    "in",
+                    "power",
+                    [
+                        "$(power:off)",
+                        "$(power:on)"
+                    ]
+                ],
+                [
+                    "==",
+                    "fpga.observed_fwVersionInstalled",
+                    "$(x)"
+                ]
+            ],
+            "parameters": {
+                "x": {
+                    "type": "string"
+                }
+            },
+            "post_execution": {
+                "power": "$(power:starting)"
+            },
+            "type": "action"
+        },
+        "type": "schema"
+    },
+    "e_manifestStatus": {
+        "symbols": [
+            "error",
+            "ready",
+            "building"
+        ],
+        "type": "enum"
+    },
+    "enclosure": {
+        "iZone1": {
+            "iZoneBoard1": {
+                "extends": "iZoneBoard",
+                "fabric": {
+                    "type": "UpperSwitchFabric"
+                }
+            },
+            "iZoneBoard2": {
+                "extends": "iZoneBoard",
+                "fabric": {
+                    "type": "LowerSwitchFabric"
+                }
+            },
+            "type": "IZone"
+        },
+        "node1": {
+            "extends": "node"
+        },
+        "type": "Enclosure"
+    },
+    "iZoneBoard": {
+        "fabric": {
+            "type": "SwitchFabric"
+        },
+        "iZoneBoardMp": {
+            "type": "SwitchMP"
+        },
+        "switchMhwFpga": {
+            "type": "SwitchMHWFPGA"
+        },
+        "type": "IZoneBoard"
+    },
+    "main": {
+        "enableNonGracefulShutdown": false,
+        "rack1": {
+            "extends": "rack"
+        }
+    },
+    "node": {
+        "enableNonGracefulShutdown": false,
+        "memoryBoard": {
+            "mediaControllers": {
+                "type": "Fam"
+            },
+            "type": "MemoryBoard"
+        },
+        "socBoard": {
+            "fabric": {
+                "type": "NodeFabric"
+            },
+            "nodeMhwFpga": {
+                "type": "NodeMHWFPGA"
+            },
+            "nodeMp": {
+                "type": "NodeMP"
+            },
+            "soc": {
+                "enableNonGracefulShutdown": false,
+                "local_power": "$(power:on)",
+                "nextOsImage.manifest": "$(default_next_os_image_manifest)",
+                "runningOsImageManifest": "$(default_running_os_image_manifest)",
+                "type": "SoC"
+            },
+            "type": "SoCBoard"
+        },
+        "type": "Node"
+    },
+    "power": {
+        "symbols": [
+            "error",
+            "starting",
+            "off",
+            "stopping",
+            "on"
+        ],
+        "type": "enum"
+    },
+    "rack": {
+        "default_next_os_image_manifest": "v51",
+        "default_running_os_image_manifest": "v51",
+        "enclosure1": {
+            "extends": "enclosure"
+        },
+        "force_all_fabric_soc_off": false,
+        "force_all_fam_fabric_soc_off": false,
+        "force_all_soc_off": false,
+        "power": "$(power:on)",
+        "type": "Rack"
+    },
+    "status": {
+        "symbols": [
+            "unset",
+            "error",
+            "ok"
+        ],
+        "type": "enum"
+    }
+}
+}

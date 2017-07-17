@@ -1,0 +1,5 @@
+{"value":{
+    "BridgeFPGA": {
+        "extends": "Firmware",
+        "type": "schema"
+    },

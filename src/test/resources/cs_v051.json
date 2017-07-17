@@ -1,0 +1,438 @@
+{"value": {
+    "enableNonGracefulShutdown": false,
+    "rack1": {
+        "all_fabric_pow": "on",
+        "all_node_fam_pow": "on",
+        "all_node_soc_pow": "on",
+        "default_next_os_image_manifest": "v51",
+        "default_running_os_image_manifest": "v51",
+        "enableNonGracefulShutdown": false,
+        "enclosure1": {
+            "enableNonGracefulShutdown": false,
+            "enablePowerOffForce": false,
+            "iZone1": {
+                "iZoneBoard1": {
+                    "fabric": {
+                        "enableNonGracefulShutdown": false,
+                        "enablePowerOffForce": false,
+                        "fpga": {
+                            "fpga1": {},
+                            "fpga2": {},
+                            "fwVersion": "v1",
+                            "fwVersionInstalled": "v1",
+                            "last_action_status": {
+                                "error_code": 0,
+                                "error_mgs": "none",
+                                "recoverable": false,
+                                "status": "unset"
+                            },
+                            "observed_fwVersion": "v1",
+                            "observed_fwVersionInstalled": "v1",
+                            "state_status": {
+                                "error_code": 0,
+                                "error_mgs": "none",
+                                "recoverable": false,
+                                "status": "unset"
+                            }
+                        },
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "link_trained_up": true,
+                        "local_power": "on",
+                        "observed_power": "on",
+                        "power": "on",
+                        "resource_override": "on",
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    },
+                    "iZoneBoardMp": {
+                        "complex_type_set": true,
+                        "coordinate_set": true,
+                        "driversInstalled": "v1",
+                        "driversVersion": "v1",
+                        "fwVersion": "v1",
+                        "fwVersionInstalled": "v1",
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "mFwVersion": "v1",
+                        "mFwVersionInstalled": "v1",
+                        "observed_driversInstalled": "v1",
+                        "observed_driversVersion": "v1",
+                        "observed_fwVersion": "v1",
+                        "observed_fwVersionInstalled": "v1",
+                        "observed_mFwVersion": "v1",
+                        "observed_mFwVersionInstalled": "v1",
+                        "observed_osImage": "v1",
+                        "observed_osImageInstalled": "v1",
+                        "osImage": "v1",
+                        "osImageInstalled": "v1",
+                        "rebootSeqNbr": 0,
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    },
+                    "switchMhwFpga": {
+                        "fwVersion": "v1",
+                        "fwVersionInstalled": "v1",
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "observed_fwVersion": "v1",
+                        "observed_fwVersionInstalled": "v1",
+                        "power": "on",
+                        "resetSeqNbr": 0,
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    }
+                },
+                "iZoneBoard2": {
+                    "fabric": {
+                        "enableNonGracefulShutdown": false,
+                        "enablePowerOffForce": false,
+                        "fpga": {
+                            "fpga1": {},
+                            "fpga2": {},
+                            "fwVersion": "v1",
+                            "fwVersionInstalled": "v1",
+                            "last_action_status": {
+                                "error_code": 0,
+                                "error_mgs": "none",
+                                "recoverable": false,
+                                "status": "unset"
+                            },
+                            "observed_fwVersion": "v1",
+                            "observed_fwVersionInstalled": "v1",
+                            "state_status": {
+                                "error_code": 0,
+                                "error_mgs": "none",
+                                "recoverable": false,
+                                "status": "unset"
+                            }
+                        },
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "link_trained_up": true,
+                        "local_power": "on",
+                        "observed_power": "on",
+                        "power": "on",
+                        "resource_override": "on",
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    },
+                    "iZoneBoardMp": {
+                        "complex_type_set": true,
+                        "coordinate_set": true,
+                        "driversInstalled": "v1",
+                        "driversVersion": "v1",
+                        "fwVersion": "v1",
+                        "fwVersionInstalled": "v1",
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "mFwVersion": "v1",
+                        "mFwVersionInstalled": "v1",
+                        "observed_driversInstalled": "v1",
+                        "observed_driversVersion": "v1",
+                        "observed_fwVersion": "v1",
+                        "observed_fwVersionInstalled": "v1",
+                        "observed_mFwVersion": "v1",
+                        "observed_mFwVersionInstalled": "v1",
+                        "observed_osImage": "v1",
+                        "observed_osImageInstalled": "v1",
+                        "osImage": "v1",
+                        "osImageInstalled": "v1",
+                        "rebootSeqNbr": 0,
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    },
+                    "switchMhwFpga": {
+                        "fwVersion": "v1",
+                        "fwVersionInstalled": "v1",
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "observed_fwVersion": "v1",
+                        "observed_fwVersionInstalled": "v1",
+                        "power": "on",
+                        "resetSeqNbr": 0,
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    }
+                }
+            },
+            "last_action_status": {
+                "error_code": 0,
+                "error_mgs": "none",
+                "recoverable": false,
+                "status": "unset"
+            },
+            "local_power": "on",
+            "node1": {
+                "enableNonGracefulShutdown": false,
+                "enablePowerOffForce": false,
+                "last_action_status": {
+                    "error_code": 0,
+                    "error_mgs": "none",
+                    "recoverable": false,
+                    "status": "unset"
+                },
+                "local_power": "on",
+                "memoryBoard": {
+                    "mediaControllers": {
+                        "enableNonGracefulShutdown": false,
+                        "enablePowerOffForce": false,
+                        "fpga": {
+                            "fwVersion": "v1",
+                            "fwVersionInstalled": "v1",
+                            "last_action_status": {
+                                "error_code": 0,
+                                "error_mgs": "none",
+                                "recoverable": false,
+                                "status": "unset"
+                            },
+                            "observed_fwVersion": "v1",
+                            "observed_fwVersionInstalled": "v1",
+                            "state_status": {
+                                "error_code": 0,
+                                "error_mgs": "none",
+                                "recoverable": false,
+                                "status": "unset"
+                            }
+                        },
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "local_power": "on",
+                        "mc1": {},
+                        "mc2": {},
+                        "mc3": {},
+                        "mc4": {},
+                        "micro": {
+                            "fwVersion": "v1",
+                            "fwVersionInstalled": "v1",
+                            "last_action_status": {
+                                "error_code": 0,
+                                "error_mgs": "none",
+                                "recoverable": false,
+                                "status": "unset"
+                            },
+                            "observed_fwVersion": "v1",
+                            "observed_fwVersionInstalled": "v1",
+                            "power": "on",
+                            "resetSeqNbr": 0,
+                            "state_status": {
+                                "error_code": 0,
+                                "error_mgs": "none",
+                                "recoverable": false,
+                                "status": "unset"
+                            }
+                        },
+                        "observed_power": "on",
+                        "power": "on",
+                        "resource_override": "on",
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    }
+                },
+                "observed_power": "on",
+                "power": "on",
+                "resource_override": "on",
+                "socBoard": {
+                    "fabric": {
+                        "enableNonGracefulShutdown": false,
+                        "enablePowerOffForce": false,
+                        "fpga": {
+                            "fwVersion": "v1",
+                            "fwVersionInstalled": "v1",
+                            "last_action_status": {
+                                "error_code": 0,
+                                "error_mgs": "none",
+                                "recoverable": false,
+                                "status": "unset"
+                            },
+                            "observed_fwVersion": "v1",
+                            "observed_fwVersionInstalled": "v1",
+                            "state_status": {
+                                "error_code": 0,
+                                "error_mgs": "none",
+                                "recoverable": false,
+                                "status": "unset"
+                            }
+                        },
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "local_power": "on",
+                        "observed_power": "on",
+                        "power": "on",
+                        "resource_override": "on",
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    },
+                    "nodeMhwFpga": {
+                        "fwVersion": "v1",
+                        "fwVersionInstalled": "v1",
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "observed_fwVersion": "v1",
+                        "observed_fwVersionInstalled": "v1",
+                        "power": "on",
+                        "resetSeqNbr": 0,
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    },
+                    "nodeMp": {
+                        "complex_type_set": true,
+                        "coordinate_set": true,
+                        "driversInstalled": "v1",
+                        "driversVersion": "v1",
+                        "fwVersion": "v1",
+                        "fwVersionInstalled": "v1",
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "mFwVersion": "v1",
+                        "mFwVersionInstalled": "v1",
+                        "observed_driversInstalled": "v1",
+                        "observed_driversVersion": "v1",
+                        "observed_fwVersion": "v1",
+                        "observed_fwVersionInstalled": "v1",
+                        "observed_mFwVersion": "v1",
+                        "observed_mFwVersionInstalled": "v1",
+                        "observed_osImage": "v1",
+                        "observed_osImageInstalled": "v1",
+                        "osImage": "v1",
+                        "osImageInstalled": "v1",
+                        "rebootSeqNbr": 0,
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    },
+                    "soc": {
+                        "enableNonGracefulShutdown": false,
+                        "enablePowerOffForce": false,
+                        "fwVersion": "v1",
+                        "fwVersionInstalled": "v1",
+                        "last_action_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        },
+                        "local_power": "on",
+                        "nextOsImage": {
+                            "manifest": "v51",
+                            "observed_manifest": "v51",
+                            "observed_message": "ok",
+                            "observed_status": "ready"
+                        },
+                        "observed_fwVersion": "v1",
+                        "observed_fwVersionInstalled": "v1",
+                        "observed_power": "on",
+                        "power": "on",
+                        "resource_override": "on",
+                        "runningOsImageManifest": "v51",
+                        "state_status": {
+                            "error_code": 0,
+                            "error_mgs": "none",
+                            "recoverable": false,
+                            "status": "unset"
+                        }
+                    }
+                },
+                "state_status": {
+                    "error_code": 0,
+                    "error_mgs": "none",
+                    "recoverable": false,
+                    "status": "unset"
+                }
+            },
+            "observed_power": "on",
+            "power": "on",
+            "resource_override": "on",
+            "state_status": {
+                "error_code": 0,
+                "error_mgs": "none",
+                "recoverable": false,
+                "status": "unset"
+            }
+        },
+        "force_all_fabric_soc_off": false,
+        "force_all_fam_fabric_soc_off": false,
+        "force_all_soc_off": false,
+        "power": "on"
+    }
+}
+}
